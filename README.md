@@ -31,12 +31,12 @@
 
 ### Association
 - belongs_to: user
-- belongs_to: order
-- has_one_active_hash: category
-- has_one_active_hash: condition
-- has_one_active_hash: postage_payer
-- has_one_active_hash: prefecture
-- has_one_active_hash: ship_date_estimate
+- has_one: order
+- belongs_to_active_hash: category
+- belongs_to_active_hash: condition
+- belongs_to_active_hash: postage_payer
+- belongs_to_active_hash: prefecture
+- belongs_to_active_hash: ship_date_estimate
 
 ## ordersテーブル
 
@@ -62,4 +62,4 @@
 
 ### Association
 - belongs_to: order
-- has_one_active_hash: prefecture
+- belongs_to_active_hash: prefecture
