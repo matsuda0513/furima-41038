@@ -1,0 +1,46 @@
+ja:
+  hello: "こんにちは世界"
+  date:
+    order: ["year", "month", "day"]
+
+  activerecord:
+    models:
+      user: ユーザー
+    attributes:
+      user:
+        first_name: 名前（全角）
+        last_name: 苗字（全角）
+        first_name_kana: 名前（カナ）
+        last_name_kana: 苗字（カナ）
+        nickname: ニックネーム
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード(確認)
+        birthday: 生年月日
+
+      errors:
+        messages:
+          blank: "を入力してください"
+          invalid: "は不正な値です"
+          taken: "はすでに存在します"
+          confirmation: "と一致しません"
+          empty: "を入力してください"
+          too_long: "は%{count}文字以内で入力してください"
+          too_short: "は%{count}文字以上で入力してください"
+          wrong_length: "は%{count}文字で入力してください"
+          not_a_number: "は数値で入力してください"
+          not_an_integer: "は整数で入力してください"
+          greater_than: "は%{count}より大きい値にしてください"
+          greater_than_or_equal_to: "は%{count}以上の値にしてください"
+          equal_to: "は%{count}にしてください"
+          less_than: "は%{count}より小さい値にしてください"
+          less_than_or_equal_to: "は%{count}以下の値にしてください"
+          other_than: "は%{count}以外の値にしてください"
+          odd: "は奇数にしてください"
+          even: "は偶数にしてください"
+          not_found_in_database: "%{authentication_keys}またはパスワードが違います。"
+      
+  devise:
+    failure:
+      user:
+        not_found_in_database: "メールアドレスまたはパスワードが正しくありません"
