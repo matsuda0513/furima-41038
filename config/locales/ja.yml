@@ -44,3 +44,6 @@ ja:
     failure:
       user:
         not_found_in_database: "メールアドレスまたはパスワードが正しくありません"
+    sessions:
+      user:
+        signed_out: 'ログアウトしました'
