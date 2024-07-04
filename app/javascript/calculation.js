@@ -1,16 +1,11 @@
-  // const priceInput = document.getElementById("item-price");
-  // priceInput.addEventListener('input', () => {
-  //   const inputValue = priceInput.value;
-  //   const addTaxDom = document.getElementById('add-tax-price');
-
   document.addEventListener('DOMContentLoaded', () => {
     const priceInput = document.getElementById("item-price");
 
-    priceInput.addEventListener('input', () => {
+    priceInput.addEventListener('input', (e) => {
         const inputValue = parseFloat(priceInput.value);
         const addTaxDom = document.getElementById('add-tax-price');
         const profitDom = document.getElementById('profit');
-        
+
       if (isNaN(inputValue) || inputValue < 300 || inputValue > 9999999) {
             addTaxDom.innerHTML = '';
             profitDom.innerHTML = '';
@@ -22,6 +17,8 @@
 
         addTaxDom.innerHTML = tax;
         profitDom.innerHTML = profit;
+        
+        e.preventDefault();
 
         console.log(`入力金額: ${inputValue}, 販売手数料: ${tax}, 販売利益: ${profit}`);
     });
