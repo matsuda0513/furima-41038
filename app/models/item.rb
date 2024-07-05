@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :user
+  has_one :order
   belongs_to_active_hash :category
   belongs_to_active_hash :condition
   belongs_to_active_hash :postage_payer
@@ -26,6 +27,6 @@ class Item < ApplicationRecord
   validates :ship_date_estimate_id, presence: true, numericality: { other_than: 1, message: 'を選択して下さい' }
 
   # def sold_out?
-  #   order_id.present?
+  #  self.order.present?
   # end
 end
