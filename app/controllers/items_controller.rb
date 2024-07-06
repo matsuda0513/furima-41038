@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_item, only: [:edit, :update, :show, :destroy]
 
   def index
@@ -37,8 +37,12 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    @item.destroy
-    redirect_to root_path
+    if @item.user == current_user
+      @item.destroy
+      redirect_to root_path, notice: '商品を削除しました。'
+    else
+      redirect_to root_path, alert: '削除権限がありません。'
+    end
   end
 
   private
