@@ -2,11 +2,26 @@ ja:
   hello: "こんにちは世界"
   date:
     order: ["year", "month", "day"]
+  
+  activemodel:
+    models:
+      order_address: 購入配送先
+    attributes:
+      order_address:
+        postal_code: 郵便番号
+        prefecture_id: 都道府県
+        city: 市区町村
+        address: 番地
+        building_name: 建物名
+        phone_number: 電話番号
+        token: クレジットカード情報
+
 
   activerecord:
     models:
       user: ユーザー
       item: 商品
+
     attributes:
       user:
         first_name: 名前（全角）

@@ -25,8 +25,4 @@ class Item < ApplicationRecord
   validates :postage_payer_id, presence: true, numericality: { other_than: 1, message: 'を選択して下さい' }
   validates :prefecture_id, presence: true, numericality: { other_than: 1, message: 'を選択して下さい' }
   validates :ship_date_estimate_id, presence: true, numericality: { other_than: 1, message: 'を選択して下さい' }
-
-  # def sold_out?
-  #  self.order.present?
-  # end
 end
