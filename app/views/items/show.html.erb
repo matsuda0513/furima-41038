@@ -8,13 +8,11 @@
     </h2>
     <div class="item-img-content">
       <%= image_tag @item.image ,class:"item-box-img" %>
-      <%# 商品が売れている場合は、sold outを表示しましょう %>
-      <%# <% if item.sold_out? %>
+      <% if @item.order.present? %>
       <div class="sold-out">
         <span>Sold Out!!</span>
       </div>
-      <%# <% end %>
-      <%# //商品が売れている場合は、sold outを表示しましょう %>
+      <% end %>
     </div>
     <div class="item-price-box">
       <span class="item-price">
@@ -24,8 +22,7 @@
         <%= @item.postage_payer.name %>
       </span>
     </div>
-    <%# コメントアウト部分は購入機能後 %  && !@item.sold_out?%>
-    <% if user_signed_in? %>
+    <% if user_signed_in? && @item.order.blank? %>
       <% if current_user == @item.user %>
         <%= link_to "商品の編集", edit_item_path(@item), method: :get, class: "item-red-btn" %>
         <p class="or-text">or</p>

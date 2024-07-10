@@ -1,13 +1,16 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, except: :index
   before_action :set_item
+  before_action :redirect_if_not_signed_in, only: [:index, :create]
+  before_action :redirect_if_not_purchasable, only: [:index, :create]
 
   def index
-    # if @item.user == current_user || @item.order.present?
-    #   redirect_to root_path, alert: 'この商品は購入できません。'
-    # end
-    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
-    @order_address = OrderAddress.new
+    if @item.user == current_user || @item.order.present?
+      redirect_to root_path, alert: 'この商品は購入できません。'
+    else
+      gon.public_key = ENV['PAYJP_PUBLIC_KEY']
+      @order_address = OrderAddress.new
+    end
   end
 
   def new
@@ -15,25 +18,16 @@ class OrdersController < ApplicationController
   end
 
   def create
-    # if @item.user == current_user || @item.order.present?
-    #   redirect_to root_path, alert: 'この商品は購入できません。'
-    # end
     @order_address = OrderAddress.new(order_params)
     if @order_address.valid?
       pay_item
       @order_address.save
       redirect_to root_path
     else
-      gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
+      gon.public_key = ENV['PAYJP_PUBLIC_KEY']
       render :index, status: :unprocessable_entity
     end
   end
-
-  # def show
-  #   if @item.user == current_user
-  #     redirect_to root_path
-  #   end
-  # end
 
   private
 
@@ -48,12 +42,23 @@ class OrdersController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
-      amount: @item.price,  # 商品の値段
-      card: order_params[:token],    # カードトークン
-      currency: 'jpy'                 # 通貨の種類（日本円）
+      amount: @item.price,
+      card: order_params[:token],
+      currency: 'jpy'
     )
   end
 
+  def redirect_if_not_signed_in
+    unless user_signed_in?
+      redirect_to new_user_session_path
+    end
+  end
+
+  def redirect_if_not_purchasable
+    if @item.user == current_user || @item.order.present?
+      redirect_to root_path, alert: 'この商品は購入できません。'
+    end
+  end
 end
